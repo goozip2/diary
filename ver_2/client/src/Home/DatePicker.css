@@ -1,0 +1,113 @@
+.react-datepicker {
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
+    border: none ;
+    font-family: AbeeZee;
+    border-radius: 4px;
+    margin:60px 90px;
+    width:80%;
+}
+
+.react-datepicker__month-container {
+    text-align: center;
+    border: transparent;
+    border-radius: 45px;
+    width:100%;
+}
+
+.react-datepicker__header{
+    padding-top: 1.5em;
+    background: white;
+    
+}
+.react-datepicker__current-month{
+    color: #828282;
+    font-size:30px;
+    margin-bottom: 35px;
+}
+
+.react-datepicker__day-name{
+    font-size: 25px;
+    margin-bottom: 15px;
+    margin-right:33px;
+    margin-left:27px;
+}
+
+.react-datepicker__navigation {
+    margin:25px;
+}
+.react-datepicker__navigation-icon{
+    display:inline-block; 
+}
+
+.react-datepicker__month{
+    font-size:25px;
+    margin: 15px 0px;
+}
+
+/* day: 주말 날짜 */
+.react-datepicker__day:nth-child(1){
+    color:red;
+}
+.react-datepicker__day:nth-child(7){
+    color:#8685FF;
+}
+
+/* day-name:요일 */
+.react-datepicker__day-name:nth-child(1){
+    color: #FF5555;
+}
+.react-datepicker__day-name:nth-child(7){
+    color:#8685FF;
+}
+
+/* 일반 날짜 */
+.react-datepicker__day{
+    margin: 25px 30px;
+    font-weight:400;
+    color: rgb(39, 38, 38);
+}
+
+.react-datepicker__day--selected{
+    background: none;
+    padding:8px;
+    border: 0.5px solid;
+    border-color : red;
+    margin: 15px 22px;
+    border-radius: 50%;
+}
+
+
+/* 회색 동그라미 버전 */
+.react-datepicker__day--highlighted{
+    background-color: #faebeb;
+    font-weight:500;
+    padding:8px;
+    margin: 15px 22px;
+    border-radius: 50%;
+} 
+
+/* 동그라미 제거 버전(미완) */
+/*.react-datepicker__day--highlighted{
+    color:black;
+    background-color: white;
+    font-weight:500;
+    padding:8px;
+    margin: 15px 22px;
+    border-radius: 50%;
+}
+*/
+.react-datepicker__day:hover {
+        border-radius: 50%;
+        background: #f0f0f0;
+        padding:8px;
+        margin: 15px 22px;
+        border-radius: 50%;
+    }
+
+/* 달력 이동시 오늘 날짜와 달이 다르고 날짜는 같을 때  */
+.react-datepicker__day--keyboard-selected{
+        background: none;
+        padding:8px;
+        margin: 15px 22px;
+        border-radius: 50%;
+}

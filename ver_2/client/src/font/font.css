@@ -1,0 +1,17 @@
+@font-face {
+	font-family: "GoogleNanumPen";
+	src: url(./NanumPenScript-Regular.ttf);
+}
+
+:root {
+	--font-googleNanumPen: "GoogleNanumPen";
+}
+
+@font-face {
+	font-family: "Dovemayo";
+	src: url(./Dovemayo_wild.ttf);
+}
+
+:root {
+	--font-Dovemayo: "Dovemayo";
+}

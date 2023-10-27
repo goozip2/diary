@@ -1,0 +1,23 @@
+section{
+    display: flex;
+    flex-direction: column;
+    margin-top: 80px;
+    align-items: center;
+    height: 100vh;
+
+}
+
+section:nth-child(2){
+    background-color: #E5E0FF;
+}
+section:nth-child(4){
+    background-color: #e5ebff;
+}
+
+/* 주황 :  #fce7d9 */
+/* 분홍: #ffe5f0  */
+/* 파랑:  #e5ebff */
+a {
+    text-decoration-line: none;
+}
+

@@ -1,0 +1,17 @@
+.DS_Store
+ver_2/client/src/Model/model/emmo/added_tokens.json
+ver_2/client/src/Model/model/emmo/config.json
+ver_2/client/src/Model/model/emmo/pytorch_model.bin
+ver_2/client/src/Model/model/emmo/special_tokens_map.json
+ver_2/client/src/Model/model/emmo/tokenizer.json
+ver_2/client/src/Model/model/emmo/tokenizer_config.json
+ver_2/client/src/Model/model/emmo/vocab.txt
+ver_2/client/src/Model/model/summ/config.json
+ver_2/client/src/Model/model/summ/generation_config.json
+ver_2/client/src/Model/model/summ/pytorch_model.bin
+ver_2/client/src/Model/model/summ/special_tokens_map.json
+ver_2/client/src/Model/model/summ/tokenizer.json
+ver_2/client/src/Model/model/summ/tokenizer_config.json
+ver_2/client/src/Model/__pycache__/model.cpython-39.pyc
+ver_2/client/yarn.lock
+ver_2/server/yarn.lock
