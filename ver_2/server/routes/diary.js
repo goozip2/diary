@@ -107,19 +107,21 @@ router.post("/", (req, res) => {
           json.diary_book = result[0].DIARY_BOOK;
           json.diary_summary = result[0].DIARY_SUMMARY;
 
-          var site_url = result[0].DIARY_CATEGORY_SITE;
-          var playlist_url = result[0].DIARY_PLAYLIST;
-          var movie_url = result
-          if (playlist_url == null) {
-            json.playlistTitle = "로딩 중입니다. 3초 후 새로고침을 눌러주세요.";
-            json.playlistURL = "데이터없음playlistURL";
-            json.thumbnailURL = "데이터없음thumbnailURL";
+          //var site_url = result[0].DIARY_CATEGORY_SITE;
+          //var playlist_url = result[0].DIARY_PLAYLIST;
+          var movie_id = result[0].DIARY_MOVIE;
+          var book_id = result[0].DIARY_BOOK;
+          if (movie_id == null) {
+            json.movieTitle = "로딩 중입니다. 3초 후 새로고침을 눌러주세요.";
+            json.movieURL = "데이터없음movieURL";
+            json.movieImageURL = "데이터없음movieImageURL";
+            json.movieProducer = "데이터없음movieProducer"
             res.send(json);
             res.end();
           } else {
             const exec = conn.query(
-              "select PLAYLIST_URL, PLAYLIST_TITLE from playlist where playlist_id ='" +
-                result[0].DIARY_PLAYLIST +
+              "select MOVIE_URL, MOVIE_TITLE, MOVIE_IMAGE_URL, MOVIE_PRODUCER from movie where movie_id ='" +
+                result[0].DIARY_MOVIE +
                 "';",
               (err, result) => {
                 conn.release();
@@ -137,35 +139,37 @@ router.post("/", (req, res) => {
                 } else {
                   // sql 성공 시
                   // 하루에 일기 1개 초과 시
-                  let playlist_url = result[0].PLAYLIST_URL;
-                  let thumbnail = playlist_url.substring(32);
-                  thumbnail =
-                    "https://img.youtube.com/vi/" +
-                    thumbnail +
-                    "/maxresdefault.jpg";
-                  let playlist_title = result[0].PLAYLIST_TITLE;
+                  let movieURL = result[0].MOVIE_URL;
+                  let movieImageURL = result[0].MOVIE_IMAGE_URL;
+                  let movieTitle = result[0].MOVIE_TITLE;
+                  let movieProducer = result[0].MOVIE_PRODUCER;
                   //console.log("다이어리 내용은 : " +first_result[0])
                   //console.log("썸네일 주소는 : " + thumbnail);
                   //console.log("플레이리스트 url은 : " + playlist_url);
                   //console.log("플레이리스트 제목은 : " + playlist_title);
-                  json.playlistTitle = playlist_title;
-                  json.playlistURL = playlist_url;
-                  json.thumbnailURL = thumbnail;
+                  json.movieTitle = movieTitle;
+                  json.movieURL = movieURL;
+                  json.movieImageURL = movieImageURL;
+                  json.movieProducer = movieProducer;
                   //console.log(json);
                   //res.send(json);
                   //res.end();
 
                   //diary 키워드 부재로 site 추천이 안된 경우 (DB NULL)
-                  if (site_url == null) {
-                    json.site_title = "추천된 사이트가 없습니다.";
+                  if (book_id == null) {
+                    json.bookTitle = "추천된 책이 없습니다.";
+                    json.bookURL = "데이터없음movieURL";
+                    json.bookImageURL = "데이터없음movieImageURL";
+                    json.bookWriter = "데이터없음movieProducer"
                     res.send(json);
                     res.end();
                   } else {
                     //diary_category_site(site_url) 참고해서 site_title 주기
                     const exec = conn.query(
-                      "select SITE_TITLE FROM CATEGORYSITE WHERE SITE_URL = ?;",
-                      [site_url],
-                      (err, siteResult) => {
+                      "select BOOK_URL, BOOK_TITLE, BOOK_IMAGE_URL, BOOK_WRITER from BOOK where BOOK_ID ='" +
+                      result[0].DIARY_BOOK +
+                      "';",
+                      (err, bookResult) => {
                         console.log("실행된 SQL: " + exec.sql);
                         //sql 오류 시
                         if (err) {
@@ -182,7 +186,10 @@ router.post("/", (req, res) => {
                           // sql 성공 시
                           //오류가 없을 경우
                           console.log("사이트 쿼리문 성공");
-                          json.site_title = siteResult[0].SITE_TITLE;
+                          json.bookTitle = bookResult[0]. BOOK_TITLE;
+                          json.booKURL = bookResult[0]. BOOK_URL;
+                          json.bookImageURL = bookResult[0]. BOOK_IMAGE_URL;
+                          json.bookWriter = bookResult[0]. BOOK_WRITER;
                           console.log(json);
                           res.send(json);
                           res.end();
