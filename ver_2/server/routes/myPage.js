@@ -129,7 +129,7 @@ router.post("/", (req, res) => {
 
           // 3) 월별 카테고리 순위
           const exec = conn.query(
-            "select category, sum(count) as count from (select * from keyword as k join (select diary_keyword, count(diary_keyword) as count from diary where diary_writer_id = ? and diary_write_date like ? and diary_keyword is not null group by diary_keyword) as n ON k.keyword = n.diary_keyword group by k.keyword) as a group by category order by count desc limit 5;",
+            "SELECT book_title, book_url, book_image_url, book_writer FROM book where book_id IN (select diary_book from (SELECT diary_book, count(diary_book) FROM diary where diary_writer_id = ? AND diary_write_date like ? group by diary_book order by count(diary_book) desc limit 1) A);",
             [id, yearMonth],
             (err, result) => {
               // sql 오류 시
@@ -145,36 +145,28 @@ router.post("/", (req, res) => {
                 return;
               } else {
                 // sql 성공 시
-                let category_arr = [];
-                let category_count_arr = [];
-                //console.log("카테고리임0", result[0]);
-                //console.log("카테고리임", result[0].category);
-                console.log(result.length);
+                //오류가 없을 경우
+                console.log("쿼리문 성공");
 
-                for (var n = 0; n < 5; n++) {
-                  if (n < result.length) {
-                    category_arr.push(result[n].category);
-                    category_count_arr.push(result[n].count);
-                  } else {
-                    category_arr.push("");
-                    category_count_arr.push(0);
-                  }
-                }
+                console.log("book 관련 result 길이", result.length);
+                if (result.length <= 0) {
+                json.book_title = "이번 달 책 추천 기록이 없습니다.";
+                json.book_url = "";
+                json.book_image_url = "https://cdn-icons-png.flaticon.com/512/2210/2210827.png";
+                json.book_writer = "no writer";
+                } else {
+                  json.book_title = result[0].book_title;
+                  json.book_url = result[0].book_url;
+                  json.book_image_url = result[0].book_image_url;
+                  json.book_writer = result[0].book_writer;
+                        //console.log("json:", json);
+                        //res.send(json); //프론트로 보내기
+                        //res.end();
 
-                //
-                /*
-                for (var x = 0; x < result.length; x++) {
-                  // 상위 5개 카테고리
-                  category_arr.push(result[x].CATEGORY);
-                  category_count_arr.push(result[x].count);
-                }*/
-                json.category_arr = category_arr;
-                json.category_count_arr = category_count_arr;
-                //
-
-                // 4) 이달의 플레이 리스트(1위)
+                //상상기업 (영화 1위 뽑기로 수정 (플리에서))
+                // 4) 이달의 영화 리스트(1위)
                 const exec = conn.query(
-                  "SELECT playlist_title, playlist_url FROM playlist where playlist_id IN (select diary_playlist from (SELECT diary_playlist, count(diary_playlist) FROM diary where diary_writer_id = ? AND diary_write_date like ? group by diary_playlist order by count(diary_playlist) desc limit 1) A);",
+                  "SELECT movie_title, movie_url, movie_image_url, movie_producer FROM movie where movie_id IN (select diary_movie from (SELECT diary_movie, count(diary_movie) FROM diary where diary_writer_id = ? AND diary_write_date like ? group by diary_movie order by count(diary_movie) desc limit 1) A);",
                   [id, yearMonth],
                   (err, result) => {
                     console.log("실행된 SQL: " + exec.sql);
@@ -196,21 +188,16 @@ router.post("/", (req, res) => {
 
                       console.log("플리 관련 result 길이", result.length);
                       if (result.length <= 0) {
-                        json.playlist_title =
-                          "이번 달 플리 추천 기록이 없습니다.";
-                        json.playlist_url = "";
-                        json.thumbnail_url = "https://cdn-icons-png.flaticon.com/512/2210/2210827.png";
+                        json.movie_title =
+                          "이번 달 영화 추천 기록이 없습니다.";
+                        json.movie_url = "";
+                        json.movie_image_url = "https://cdn-icons-png.flaticon.com/512/2210/2210827.png";
+                        json.movie_producer = "no producer";
                       } else {
-                        let playlist_url = result[0].playlist_url;
-                        let thumbnail = playlist_url.substring(32);
-                        thumbnail =
-                          "https://img.youtube.com/vi/" +
-                          thumbnail +
-                          "/maxresdefault.jpg";
-
-                        json.playlist_title = result[0].playlist_title;
-                        json.playlist_url = result[0].playlist_url;
-                        json.thumbnail_url = thumbnail;
+                        json.movie_title = result[0].movie_title;
+                        json.movie_url = result[0].movie_url;
+                        json.movie_image_url = result[0].movie_image_url;
+                        json.movie_producer = result[0].movie_producer;
                         //console.log("json:", json);
                         //res.send(json); //프론트로 보내기
                         //res.end();
