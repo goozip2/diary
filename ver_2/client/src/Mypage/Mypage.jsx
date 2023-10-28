@@ -98,14 +98,15 @@ function Mypage(){
     const myData = location.state.myData;
 
     let emo_count_arr = myData.emo_count_arr;
-    let playlist_title = myData.playlist_title;
-    let playlist_url = myData.playlist_url;
-    let thumbnail_url = myData.thumbnail_url;
+    let book_title = myData.book_title;
+    let book_url = myData.book_url;
+    let book_image_url = myData.book_image_url;
+    let book_writer = myData.book_writer;
+    let movie_title = myData.movie_title;
+    let movie_url = myData.movie_url;
+    let movie_image_url = myData.movie_image_url;
+    let movie_producer = myData.movie_producer;
     let attendance_rate = Math.floor(myData.attendance_rate);
-
-    //category
-    let category_arr = myData.category_arr;
-    let category_count_arr = myData.category_count_arr;
     let diary_count = myData.diary_count;
 
     console.log(myData)
@@ -120,40 +121,6 @@ function Mypage(){
     {name: "불안", value: emo_count_arr[6]},
   ];
   const COLORS = ['#AB8FDA', '#F89D81', '#F9C62B', '#ED5565', '#9B9FA7', '#87C1F5', '#515966'];
-
-  //카테고리
-  const categoryData = [
-    {
-      name: category_arr[0],
-      value: category_count_arr[0],
-      img: 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.icon-icons.com%2Ficons2%2F2806%2FPNG%2F512%2Fhappy_emoji_emo_emoticon_icon_178898.png&imgrefurl=https%3A%2F%2Ficon-icons.com%2Fko%2F%25EC%2595%2584%25EC%259D%25B4%25EC%25BD%2598%2F%25ED%2596%2589%25EB%25B3%25B5-%25EC%259D%25B4%25EB%25AA%25A8%25ED%258B%25B0%25EC%25BD%2598-emo-%25EC%259D%25B4%25EB%25AA%25A8%25ED%258B%25B0%25EC%25BD%2598%2F178898&tbnid=_0DJCKOXzkNanM&vet=12ahUKEwiD-fqI0qP9AhX6p1YBHSWAC0gQMygAegUIARDCAQ..i&docid=n5a4JKDVg9EFtM&w=512&h=512&q=%ED%96%89%EB%B3%B5%20%EC%9D%B4%EB%AA%A8%EC%A7%80&ved=2ahUKEwiD-fqI0qP9AhX6p1YBHSWAC0gQMygAegUIARDCAQ',
-      ratio: Math.ceil(category_count_arr[0]/diary_count*100), //28 부분 바뀔 예정
-    },
-    {
-      name: category_arr[1],
-      value: category_count_arr[1],
-      img: 'https://via.placeholder.com/50',
-      ratio: Math.ceil(category_count_arr[1]/diary_count*100),
-    },
-    {
-      name: category_arr[2],
-      value: category_count_arr[2],
-      img: 'https://via.placeholder.com/50',
-      ratio: Math.ceil(category_count_arr[2]/diary_count*100),
-    },
-    {
-      name: category_arr[3],
-      value: category_count_arr[3],
-      img: 'https://via.placeholder.com/50',
-      ratio: Math.ceil(category_count_arr[3]/diary_count*100),
-    },
-    {
-      name: category_arr[4],
-      value: category_count_arr[4],
-      img: 'https://via.placeholder.com/50',
-      ratio: Math.ceil(category_count_arr[4]/diary_count*100),
-    },
-  ];
 
   const CustomBar = ({ x, y, width, height, value, background, label }) => (
     <g>
@@ -241,41 +208,25 @@ function Mypage(){
             </div>
         </TopLeft>
         <TopRight>
-            <h3>이번 달 일기 키워드 순위</h3>
-            <div style={{display: 'flex', justifyContent: 'center', textItems: 'center'}}>
-            <BarChart
-                width={500}
-                height={250}
-                data={categoryData}
-                margin={{ top: 20, right: 30, left: 30, bottom: 30 }}
-                layout="vertical"
-                >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" />
-                <YAxis type="category" dataKey="name" />
-                <Tooltip content={<CustomTooltip />} />
-                <Legend />
-                <Bar
-                    dataKey="value"
-                    background={data.map((d) => d.img)}
-                    barSize={18}
-                    label={<CustomBar />}
-                    fill="#93B5C6"
-                />
-            </BarChart>
-            </div>
+        <h3>이번 달 나의 출석율</h3>
+            <br></br>
+            <MyAttendance rate = {attendance_rate}/>
         </TopRight>
         <BottomLeft>
-            <h3 style={{marginBottom: '0.4em'}}>이달의 추천 플레이리스트 (월별 빈도수 1위)</h3>
+            <h3 style={{marginBottom: '0.1em'}}>이달의 추천 도서 (월별 빈도수 1위)</h3>
             <div>
-            <a href={playlist_url} target='_blank'><img src={thumbnail_url} onerror="this.src='http://www.hanbit.co.kr/images/common/logo_hanbit.png'" style={{height: '180px', borderRadius: '7px', paddingBottom: '12px'}}/></a><br />
-              <a href={playlist_url} target='_blank' style={{fontSize: '20px', fontWeight: 'normal', textDecoration: 'none', color: 'black'}}>{playlist_title}</a><br /><br />
+            <a href={book_url} target='_blank'><img src={book_image_url} onerror="this.src='http://www.hanbit.co.kr/images/common/logo_hanbit.png'" style={{height: '180px', borderRadius: '7px'}}/></a><br />
+              <a href={book_url} target='_blank' style={{fontSize: '20px', fontWeight: 'normal', textDecoration: 'none', color: 'black'}}>{'<'}{book_title}{'>'}<br></br></a>
+              <h>{book_writer}</h>
             </div>
         </BottomLeft>
         <BottomRight>
-            <h3>이번 달 나의 출석율</h3>
-            <br></br>
-            <MyAttendance rate = {attendance_rate}/>
+        <h3 style={{marginBottom: '0.1em'}}>이달의 추천 영화 (월별 빈도수 1위)</h3>
+            <div>
+            <a href={movie_url} target='_blank'><img src={movie_image_url} onerror="this.src='http://www.hanbit.co.kr/images/common/logo_hanbit.png'" style={{height: '180px', borderRadius: '7px'}}/></a><br />
+              <a href={movie_url} target='_blank' style={{fontSize: '20px', fontWeight: 'normal', textDecoration: 'none', color: 'black'}}>{'<'}{movie_title}{'>'}<br></br></a>
+              <h>{movie_producer}</h>
+            </div>
         </BottomRight>
     </Layout>
     </>
