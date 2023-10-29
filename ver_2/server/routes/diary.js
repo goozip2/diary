@@ -110,8 +110,7 @@ router.post("/", (req, res) => {
           //var site_url = result[0].DIARY_CATEGORY_SITE;
           //var playlist_url = result[0].DIARY_PLAYLIST;
           var movie_id = result[0].DIARY_MOVIE;
-          var book_id = result[0].DIARY_BOOK;
-          console.log("result 체크 : ")
+          var book_id = result[0].DIARY_BOOK
           if (movie_id == null) {
             json.movieTitle = "로딩 중입니다. 3초 후 새로고침을 눌러주세요.";
             json.movieURL = "데이터없음movieURL";
@@ -163,12 +162,11 @@ router.post("/", (req, res) => {
                   } else {
                     //diary_category_site(site_url) 참고해서 site_title 주기
                     const exec = conn.query(
-                      "select  book_url, book_title, book_image_url, book_writer from book where book_id ='" +
+                      "select BOOK_URL, BOOK_TITLE, BOOK_IMAGE_URL, BOOK_WRITER from book where book_id ='" +
                       book_id+
                       "';",
                       (err, bookResult) => {
                         console.log("실행된 SQL: " + exec.sql);
-                        console.log(result);
                         //sql 오류 시
                         if (err) {
                           console.log("SQL 실행 시, 오류 발생");
@@ -184,10 +182,10 @@ router.post("/", (req, res) => {
                           // sql 성공 시
                           //오류가 없을 경우
                           console.log("사이트 쿼리문 성공");
-                          json.bookTitle = bookResult[0].book_title;
-                          json.booKURL = bookResult[0].book_url;
-                          json.bookImageURL = bookResult[0].book_image_url;
-                          json.bookWriter = bookResult[0].book_writer;
+                          json.bookTitle = bookResult[0].BOOK_TITLE;
+                          json.booKURL = bookResult[0].BOOK_URL;
+                          json.bookImageURL = bookResult[0].BOOK_IMAGE_URL;
+                          json.bookWriter = bookResult[0].BOOK_WRITER;
                           console.log(json);
                           res.send(json);
                           res.end();
