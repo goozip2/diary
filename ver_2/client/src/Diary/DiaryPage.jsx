@@ -229,15 +229,17 @@ useEffect(() => {
                     <hr style={{width: '80%', border: 'none', backgroundColor: '#C4C4C4', height: '1px'}}></hr>
                 </div>
                 <div>
-                    <center><Bar>당신의 하루에 맞는 음악</Bar></center>
-                    <center><a href={dailyData.playlistURL} target='_blank'><img alt="thumbnail_img" src={dailyData.thumbnailURL} style={{width: '67%', borderRadius: '7px', marginTop: '30px'}}/></a></center><br />
-                    <center><a href={dailyData.playlistURL} target='_blank' style={{fontSize: '20px', fontWeight: 'bold', textDecoration: 'none', color: 'black'}}>{dailyData.playlistTitle}</a></center><br /><br />
+                    <center><Bar>당신의 하루가 불러온 영화</Bar></center>
+                    <center><a href={dailyData.movieURL} target='_blank'><img alt="thumbnail_img" src={dailyData.movieImageURL} style={{width: '22%', borderRadius: '7px', marginTop: '30px'}}/></a></center><br />
+                    <center><a href={dailyData.movieURL} target='_blank' style={{fontSize: '20px', fontWeight: 'bold', textDecoration: 'none', color: 'black'}}>{dailyData.movieTitle}</a></center><br /><br />
                     <hr style={{width: '80%', border: 'none', backgroundColor: '#C4C4C4', height: '1px'}}></hr>
                 </div>
                 <div>
-                    <center><Bar>당신의 하루가 불러온 사이트</Bar></center><br />
-                    <center><a href={dailyData.diary_category_site} target='_blank' style={{textDecoration: 'none', fontSize: '20px', fontWeight: 'bold', color: 'black'}}>{dailyData.site_title}</a></center><br />
-                    <center><a href={dailyData.diary_category_site} target='_blank' style={{textDecoration: 'none', fontSize: '17px', color: 'blue'}}>{dailyData.diary_category_site}</a></center>
+                    <center><Bar>당신의 하루가 불러온 책</Bar></center>
+                    <center><a href={dailyData.bookURL} target='_blank'><img alt="thumbnail_img" src={dailyData.bookImageURL} style={{width: '22%', borderRadius: '7px', marginTop: '30px'}}/></a></center><br />
+                    <center><a href={dailyData.bookURL} target='_blank' style={{fontSize: '20px', fontWeight: 'bold', textDecoration: 'none', color: 'black'}}>{dailyData.bookTitle}</a>
+                    <a href={dailyData.bookURL} target='_blank' style={{fontSize: '12px', fontWeight: 'bold', textDecoration: 'none', color: 'gray'}}> {'<'}{dailyData.bookWriter} {'>'}</a></center><br /><br />
+                    <hr style={{width: '80%', border: 'none', backgroundColor: '#C4C4C4', height: '1px'}}></hr>
                 </div>
             </Right>
         </div>
