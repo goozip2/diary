@@ -183,7 +183,7 @@ router.post("/", (req, res) => {
                           //오류가 없을 경우
                           console.log("사이트 쿼리문 성공");
                           json.bookTitle = bookResult[0].BOOK_TITLE;
-                          json.booKURL = bookResult[0].BOOK_URL;
+                          json.bookURL = bookResult[0].BOOK_URL;
                           json.bookImageURL = bookResult[0].BOOK_IMAGE_URL;
                           json.bookWriter = bookResult[0].BOOK_WRITER;
                           console.log(json);
