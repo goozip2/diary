@@ -108,7 +108,7 @@ function IndexPage(){
             <section id="section1">
                 <Empty ref={idxRef}/>
                 <div style={{border: 'none', marginTop: '50px'}}></div>
-                <DiaryIntroduction title={"당신의 하루에 꼭 맞는 컨텐츠 추천"} description={"일기를 작성하면, AI가 오늘 하루와 어울리는 플레이리스트와 사이트를 추천해드립니다."} />
+                <DiaryIntroduction title={"당신의 하루에 꼭 맞는 컨텐츠 추천"} description={"일기를 작성하면, AI가 오늘 하루와 어울리는 책과 영화를 추천해드립니다."} />
                 <DiaryImg src="./DiaryImage.png" alt="MypageImage"></DiaryImg>
             </section> 
             <section id= "section2">
